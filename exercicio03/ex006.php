@@ -12,7 +12,6 @@ const NOME_COMPLETO = "Eduardo da Silva";
 
 echo "Nome do cliente: " . NOME_COMPLETO . " <br> CPF: " . CPF;
 
-$a = "Olá ";
-$b = $a . "mundo!";
-
-echo $b; // Olá mundo!
+// $a = "Olá ";
+// $b = $a . "mundo!";
+// echo $b; // Olá mundo!

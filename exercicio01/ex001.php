@@ -4,7 +4,7 @@
   </head>
   <body>
     <h1>Formulário Comum</h1>
-    <form action="form.phtml" method="POST">
+    <form action="" method="POST">
       Nome: <input type="text" name="nome">
       Cidade: <input type="text" name="cidade">
       <br>
@@ -13,6 +13,9 @@
 
     <?php
       if($_POST) {
+        $nome = $_POST['nome'];
+        $cidade = $_POST['cidade'];
+
         echo "Oi, {$nome}, você mora em {$cidade}.";
       }
     ?>
