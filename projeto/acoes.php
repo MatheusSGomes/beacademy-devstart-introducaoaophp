@@ -16,7 +16,8 @@ function cadastro() {
   
     fclose($arquivo);
 
-    echo '<div class="alert alert-success">Cadastro realizado</div>';
+    $mensagem = "Cadastro realizado!";
+    include "telas/mensagem.php";
   }
 
   include 'telas/cadastro.php';
@@ -41,5 +42,60 @@ function relatorio() {
 }
 
 function erro404() {
-  include 'telas/home.php';
+  include 'telas/404.php';
+}
+
+function excluir() {
+  $id = $_GET['id'];
+
+  $contatos = file('dados/contatos.csv');
+
+  unset($contatos[$id]);
+  unlink('dados/contatos.csv');
+
+  $arquivo = fopen('dados/contatos.csv', 'a+');
+  
+  foreach ($contatos as $cadaContato) {
+    fwrite($arquivo, $cadaContato);
+  }
+
+  fclose($arquivo);
+
+  $mensagem = "Contato excluído";
+  include 'telas/mensagem.php';
+}
+
+function editar() {
+  $id = $_GET['id'];
+  
+  $contatos = file('dados/contatos.csv');
+
+  if ($_POST) {
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+
+    $contatos[$id] = "{$nome};{$email};{$telefone}".PHP_EOL;
+
+    unlink('dados/contatos.csv');
+    
+
+    $arquivo = fopen('dados/contatos.csv', 'a+');
+
+    foreach($contatos as $cadaContato) {
+      fwrite($arquivo, $cadaContato);
+    }
+
+    fclose($arquivo);
+
+    $mensagem = "Contato Atualizado";
+    include 'telas/mensagem.php';
+
+  }
+
+  $dados = explode(';', $contatos[$id]);
+
+  // var_dump($dados);
+
+  include 'telas/editar.php';
 }

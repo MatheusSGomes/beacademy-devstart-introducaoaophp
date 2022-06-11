@@ -1,22 +1,24 @@
 <!-- Exercício - Adicionar o bootstrap a páginas carregadas com rotas -->
 <?php
   
-  include 'telas/head.php';
-  include "telas/menu.php";
-  include 'acoes.php';
-  
-  $url = $_SERVER['REQUEST_URI'];
+include 'telas/head.php';
+include "telas/menu.php";
+include 'acoes.php';
 
-  match($url) {
-    "/" => home(),
-    "/cadastro" => cadastro(),
-    "/admin" => admin(),
-    "/login" => login(),
-    "/listar" => listar(),
-    "/relatorio" => relatorio(),
-    default => erro404()
-  };
+$url = explode('?', $_SERVER['REQUEST_URI']);
 
-  include 'telas/footer.php';
+match($url[0]) {
+  '/' => home(),
+  '/cadastro' => cadastro(),
+  '/admin' => admin(),
+  '/login' => login(),
+  '/listar' => listar(),
+  '/relatorio' => relatorio(),
+  '/excluir' => excluir(),
+  '/editar' => editar(),
+  default => erro404()
+};
+
+include 'telas/footer.php';
 
 ?>
